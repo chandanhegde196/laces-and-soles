@@ -287,10 +287,12 @@ let state = {
   categoryFilter: 'all',
   searchQuery: '',
   sortBy: 'featured',
-  inStockOnly: false,
+  inStockOnly: true,
   appliedPromo: null,
   selectedQuickViewProduct: null,
   selectedSize: null,
+  isOwnerAuthenticated: false,
+  ownerPin: '8888',
   checkoutDetails: {
     name: '',
     phone: '',
@@ -305,10 +307,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
   runAdidasIntroSplash();
   loadSavedState();
+  updateOwnerUI();
   renderProductGrid();
   updateCartUI();
   updateWishlistUI();
   setupEventListeners();
+  
+  if (window.location.search.includes('admin=true') || window.location.hash === '#admin') {
+    openOwnerLoginModal();
+  }
 });
 
 // INTERACTIVE MULTI-CAMERA 3D STUDIO VIDEO REEL CONTROLLER
@@ -395,6 +402,9 @@ function loadSavedState() {
   const savedCart = localStorage.getItem('ls_cart');
   const savedWishlist = localStorage.getItem('ls_wishlist');
   const savedProducts = localStorage.getItem('ls_products');
+  const savedPin = localStorage.getItem('ls_owner_pin');
+  const savedSession = sessionStorage.getItem('ls_owner_session');
+
   if (savedCart) { try { state.cart = JSON.parse(savedCart); } catch (e) {} }
   if (savedWishlist) { try { state.wishlist = JSON.parse(savedWishlist); } catch (e) {} }
   if (savedProducts) {
@@ -405,12 +415,68 @@ function loadSavedState() {
       }
     } catch (e) {}
   }
+  if (savedPin) state.ownerPin = savedPin;
+  if (savedSession === 'true') state.isOwnerAuthenticated = true;
 }
 
 function saveState() {
   localStorage.setItem('ls_cart', JSON.stringify(state.cart));
   localStorage.setItem('ls_wishlist', JSON.stringify(state.wishlist));
   localStorage.setItem('ls_products', JSON.stringify(PRODUCTS));
+}
+
+// STORE OWNER AUTHENTICATION & MANAGEMENT FUNCTIONS
+function updateOwnerUI() {
+  const bar = document.getElementById('owner-admin-bar');
+  if (bar) {
+    bar.classList.toggle('hidden', !state.isOwnerAuthenticated);
+  }
+  document.body.classList.toggle('owner-bar-active', state.isOwnerAuthenticated);
+}
+
+function openOwnerLoginModal() {
+  if (state.isOwnerAuthenticated) {
+    renderAdminProductList();
+    document.getElementById('admin-modal')?.classList.add('active');
+    return;
+  }
+  const modal = document.getElementById('owner-login-modal');
+  const pinInput = document.getElementById('owner-pin-input');
+  if (modal) {
+    modal.classList.add('active');
+    if (pinInput) {
+      pinInput.value = '';
+      setTimeout(() => pinInput.focus(), 150);
+    }
+  }
+}
+
+function verifyOwnerPin(enteredPin) {
+  if (enteredPin === state.ownerPin) {
+    state.isOwnerAuthenticated = true;
+    sessionStorage.setItem('ls_owner_session', 'true');
+    document.getElementById('owner-login-modal')?.classList.remove('active');
+    updateOwnerUI();
+    renderAdminProductList();
+    document.getElementById('admin-modal')?.classList.add('active');
+    showToast("👑 Store Owner Identity Verified! Full admin access unlocked.");
+  } else {
+    showToast("❌ Access Denied: Incorrect Security PIN!", "error");
+    const input = document.getElementById('owner-pin-input');
+    if (input) {
+      input.value = '';
+      input.focus();
+    }
+  }
+}
+
+function logoutOwnerMode() {
+  state.isOwnerAuthenticated = false;
+  sessionStorage.removeItem('ls_owner_session');
+  document.getElementById('admin-modal')?.classList.remove('active');
+  document.getElementById('change-pin-modal')?.classList.remove('active');
+  updateOwnerUI();
+  showToast("🔒 Store Owner Mode locked. Returning to customer view.");
 }
 
 // Product Card Interactive State (Size & Qty per card)
@@ -507,16 +573,17 @@ function renderProductGrid() {
   grid.innerHTML = filtered.map(product => {
     const isWishlisted = state.wishlist.some(item => item.id === product.id);
     const cs = getCardState(product.id);
+    const isUnlisted = !product.inStock;
 
     return `
-      <div class="product-card" data-id="${product.id}">
+      <div class="product-card ${isUnlisted ? 'unlisted-card' : ''}" data-id="${product.id}">
         <div class="product-card-head" onclick="openQuickView(${product.id})">
           ${product.badgeText ? `<span class="product-badge badge-${product.badge}">${product.badgeText}</span>` : ''}
-          ${!product.inStock ? `<span class="product-badge badge-sale" style="left: auto; right: 3.5rem;">Unlisted / Out of Stock</span>` : ''}
+          ${isUnlisted ? `<span class="product-badge badge-sale" style="left: auto; right: 3.5rem; background: #dc2626;">Unlisted</span>` : ''}
           <button class="wishlist-toggle ${isWishlisted ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(${product.id})" aria-label="Add to Wishlist">
             <i data-lucide="heart" fill="${isWishlisted ? 'currentColor' : 'none'}"></i>
           </button>
-          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <img src="${product.image}" alt="${product.name}" loading="lazy" style="${isUnlisted ? 'opacity: 0.6; filter: grayscale(0.5);' : ''}">
         </div>
 
         <div class="product-card-body">
@@ -538,7 +605,7 @@ function renderProductGrid() {
             <span class="size-section-label">Select Size:</span>
             <div class="size-btn-group" id="size-group-${product.id}">
               ${(product.sizes || [41,42,43,44,45]).map(s => `
-                <button type="button" class="size-btn ${s === cs.size ? 'active' : ''}" data-size="${s}" onclick="selectCardSize(${product.id}, ${s})">${s}</button>
+                <button type="button" class="size-btn ${s === cs.size ? 'active' : ''}" data-size="${s}" onclick="selectCardSize(${product.id}, ${s})" ${isUnlisted ? 'disabled' : ''}>${s}</button>
               `).join('')}
             </div>
           </div>
@@ -546,15 +613,22 @@ function renderProductGrid() {
           <!-- Quantity Picker & Add to Bag Control Row -->
           <div class="card-qty-row">
             <div class="qty-picker">
-              <button type="button" class="card-qty-btn" onclick="changeCardQty(${product.id}, -1)">-</button>
+              <button type="button" class="card-qty-btn" onclick="changeCardQty(${product.id}, -1)" ${isUnlisted ? 'disabled' : ''}>-</button>
               <span class="card-qty-val" id="card-qty-val-${product.id}">${cs.qty}</span>
-              <button type="button" class="card-qty-btn" onclick="changeCardQty(${product.id}, 1)">+</button>
+              <button type="button" class="card-qty-btn" onclick="changeCardQty(${product.id}, 1)" ${isUnlisted ? 'disabled' : ''}>+</button>
             </div>
             
-            <button type="button" class="btn btn-primary btn-sm card-add-bag-btn" id="add-btn-${product.id}" onclick="addCardToBag(${product.id})">
-              <i data-lucide="shopping-bag"></i>
-              <span>ADD SIZE ${cs.size} (${cs.qty})</span>
-            </button>
+            ${isUnlisted ? `
+              <button type="button" class="btn btn-secondary btn-sm card-add-bag-btn" disabled style="opacity: 0.5; cursor: not-allowed; flex: 1;">
+                <i data-lucide="eye-off"></i>
+                <span>UNLISTED ITEM</span>
+              </button>
+            ` : `
+              <button type="button" class="btn btn-primary btn-sm card-add-bag-btn" id="add-btn-${product.id}" onclick="addCardToBag(${product.id})">
+                <i data-lucide="shopping-bag"></i>
+                <span>ADD SIZE ${cs.size} (${cs.qty})</span>
+              </button>
+            `}
           </div>
         </div>
       </div>
@@ -616,6 +690,15 @@ function setupEventListeners() {
     });
   }
 
+  const stockToggle = document.getElementById('in-stock-only');
+  if (stockToggle) {
+    stockToggle.checked = state.inStockOnly;
+    stockToggle.addEventListener('change', (e) => {
+      state.inStockOnly = e.target.checked;
+      renderProductGrid();
+    });
+  }
+
   // Drawers
   const cartBtn = document.getElementById('cart-btn');
   const closeCartBtn = document.getElementById('close-cart');
@@ -643,17 +726,100 @@ function setupEventListeners() {
     link.addEventListener('click', () => mobileNavOverlay.classList.remove('active'));
   });
 
-  // Admin Modal
-  const adminBtn = document.getElementById('admin-panel-btn');
-  const adminModal = document.getElementById('admin-modal');
+  // Store Owner Authentication & Security Event Listeners
+  const ownerTrigger = document.getElementById('owner-portal-trigger');
+  if (ownerTrigger) ownerTrigger.addEventListener('click', openOwnerLoginModal);
+
+  const openMgrBtn = document.getElementById('open-owner-product-mgr');
+  if (openMgrBtn) openMgrBtn.addEventListener('click', () => {
+    if (!state.isOwnerAuthenticated) { openOwnerLoginModal(); return; }
+    renderAdminProductList();
+    document.getElementById('admin-modal')?.classList.add('active');
+  });
+
+  const logoutBtn = document.getElementById('owner-logout-btn');
+  if (logoutBtn) logoutBtn.addEventListener('click', logoutOwnerMode);
+
+  const changePinBtn = document.getElementById('owner-change-pin-btn');
+  const changePinModal = document.getElementById('change-pin-modal');
+  const closeChangePin = document.getElementById('close-change-pin');
+  if (changePinBtn && changePinModal) changePinBtn.addEventListener('click', () => changePinModal.classList.add('active'));
+  if (closeChangePin && changePinModal) closeChangePin.addEventListener('click', () => changePinModal.classList.remove('active'));
+
+  const ownerLoginForm = document.getElementById('owner-login-form');
+  if (ownerLoginForm) {
+    ownerLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const pin = document.getElementById('owner-pin-input')?.value;
+      verifyOwnerPin(pin);
+    });
+  }
+
+  const closeOwnerLogin = document.getElementById('close-owner-login');
+  if (closeOwnerLogin) {
+    closeOwnerLogin.addEventListener('click', () => document.getElementById('owner-login-modal')?.classList.remove('active'));
+  }
+
+  const changePinForm = document.getElementById('change-pin-form');
+  if (changePinForm) {
+    changePinForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const curr = document.getElementById('current-pin-input')?.value;
+      const next = document.getElementById('new-pin-input')?.value;
+
+      if (curr !== state.ownerPin) {
+        showToast("Current PIN is incorrect!", "error");
+        return;
+      }
+
+      state.ownerPin = next;
+      localStorage.setItem('ls_owner_pin', next);
+      changePinModal?.classList.remove('active');
+      changePinForm.reset();
+      showToast("🎉 Security PIN updated successfully!");
+    });
+  }
+
+  // Global Keyboard Shortcut: Ctrl + Shift + A
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+      e.preventDefault();
+      openOwnerLoginModal();
+    }
+  });
+
+  // Secret Triple-click on Brand Logo to open Owner Login
+  const brandLogo = document.getElementById('brand-logo');
+  let logoClickCount = 0;
+  let logoClickTimer;
+  if (brandLogo) {
+    brandLogo.addEventListener('click', (e) => {
+      logoClickCount++;
+      if (logoClickCount === 3) {
+        e.preventDefault();
+        logoClickCount = 0;
+        clearTimeout(logoClickTimer);
+        openOwnerLoginModal();
+      } else {
+        clearTimeout(logoClickTimer);
+        logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1500);
+      }
+    });
+  }
+
+  // Admin Modal Close
   const closeAdmin = document.getElementById('close-admin');
-  if (adminBtn && adminModal) adminBtn.addEventListener('click', () => { renderAdminProductList(); adminModal.classList.add('active'); });
+  const adminModal = document.getElementById('admin-modal');
   if (closeAdmin && adminModal) closeAdmin.addEventListener('click', () => adminModal.classList.remove('active'));
 
   const newProductForm = document.getElementById('add-product-form');
   if (newProductForm) {
     newProductForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      if (!state.isOwnerAuthenticated) {
+        openOwnerLoginModal();
+        return;
+      }
       const name = document.getElementById('new-prod-name').value;
       const brand = document.getElementById('new-prod-brand').value;
       const category = document.getElementById('new-prod-category').value;
@@ -888,15 +1054,17 @@ function renderAdminProductList() {
   container.innerHTML = PRODUCTS.map(p => `
     <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.8rem; background: var(--bg-card); border-radius: var(--radius-sm); border: 1px solid var(--border-glass);">
       <div style="display: flex; align-items: center; gap: 0.8rem;">
-        <img src="${p.image}" style="width: 45px; height: 45px; border-radius: 4px; object-fit: cover;">
+        <img src="${p.image}" style="width: 45px; height: 45px; border-radius: 4px; object-fit: cover; ${!p.inStock ? 'opacity: 0.5; filter: grayscale(1);' : ''}">
         <div>
           <strong style="display: block; font-size: 0.9rem;">${p.name}</strong>
-          <span style="font-size: 0.75rem; color: var(--text-muted);">₹${p.price.toLocaleString('en-IN')} | Status: ${p.inStock ? '✅ Listed' : '❌ Unlisted'}</span>
+          <span style="font-size: 0.75rem; color: ${p.inStock ? 'var(--accent-gold)' : 'var(--accent-red)'}; font-weight: 600;">
+            ₹${p.price.toLocaleString('en-IN')} | Status: ${p.inStock ? '✅ Listed in Store' : '❌ Unlisted'}
+          </span>
         </div>
       </div>
       <div style="display: flex; gap: 0.4rem;">
-        <button class="btn btn-secondary btn-sm" onclick="toggleProductStock(${p.id})">
-          ${p.inStock ? 'Unlist' : 'Relist'}
+        <button class="btn ${p.inStock ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="toggleProductStock(${p.id})">
+          ${p.inStock ? 'Unlist' : 'Relist / List'}
         </button>
         <button class="btn btn-secondary btn-sm" style="color: var(--accent-red);" onclick="deleteProduct(${p.id})">
           Delete
@@ -907,17 +1075,25 @@ function renderAdminProductList() {
 }
 
 function toggleProductStock(id) {
+  if (!state.isOwnerAuthenticated) {
+    openOwnerLoginModal();
+    return;
+  }
   const prod = PRODUCTS.find(p => p.id === id);
   if (prod) {
     prod.inStock = !prod.inStock;
     saveState();
     renderProductGrid();
     renderAdminProductList();
-    showToast(`${prod.name} status updated: ${prod.inStock ? 'Listed' : 'Unlisted'}`);
+    showToast(`${prod.name} status updated: ${prod.inStock ? 'Listed in Store' : 'Unlisted'}`);
   }
 }
 
 function deleteProduct(id) {
+  if (!state.isOwnerAuthenticated) {
+    openOwnerLoginModal();
+    return;
+  }
   PRODUCTS = PRODUCTS.filter(p => p.id !== id);
   saveState();
   renderProductGrid();
@@ -972,10 +1148,17 @@ function openQuickView(productId) {
 
         <!-- Action buttons -->
         <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;" class="mt-4">
-          <button class="btn btn-primary btn-glow" style="flex: 1;" onclick="addQuickViewToCart()">
-            <span>ADD TO BAG</span>
-            <i data-lucide="shopping-bag"></i>
-          </button>
+          ${!product.inStock ? `
+            <button class="btn btn-secondary" style="flex: 1; opacity: 0.5; cursor: not-allowed;" disabled>
+              <i data-lucide="eye-off"></i>
+              <span>CURRENTLY UNLISTED</span>
+            </button>
+          ` : `
+            <button class="btn btn-primary btn-glow" style="flex: 1;" onclick="addQuickViewToCart()">
+              <span>ADD TO BAG</span>
+              <i data-lucide="shopping-bag"></i>
+            </button>
+          `}
           
           <button class="btn btn-secondary" onclick="orderViaInstagram('${product.name}')">
             <i data-lucide="instagram"></i>
@@ -1004,6 +1187,10 @@ function selectModalSize(size) {
 
 function addQuickViewToCart() {
   if (!state.selectedQuickViewProduct) return;
+  if (!state.selectedQuickViewProduct.inStock) {
+    showToast("This item is unlisted and cannot be added to bag.", "error");
+    return;
+  }
   addToCart(state.selectedQuickViewProduct.id, state.selectedSize);
   document.getElementById('quickview-modal').classList.remove('active');
 }
@@ -1026,14 +1213,19 @@ function orderCartViaWhatsApp() {
   window.open(`https://wa.me/919876543210?text=${text}`, '_blank');
 }
 
-function addToCart(productId, size = 41) {
+function addToCart(productId, size = 41, qty = 1) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
+
+  if (!product.inStock) {
+    showToast(`${product.name} is unlisted by store admin.`, "error");
+    return;
+  }
 
   const cartKey = `${product.id}_${size}`;
   const existingIndex = state.cart.findIndex(item => item.cartKey === cartKey);
   if (existingIndex > -1) {
-    state.cart[existingIndex].qty += 1;
+    state.cart[existingIndex].qty += qty;
   } else {
     state.cart.push({
       cartKey,
@@ -1042,7 +1234,7 @@ function addToCart(productId, size = 41) {
       price: product.price,
       image: product.image,
       size,
-      qty: 1
+      qty: qty
     });
   }
 
