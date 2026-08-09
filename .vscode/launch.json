@@ -2,25 +2,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "chrome",
+            "type": "pwa-chrome",
             "request": "launch",
-            "name": "Open Webpage in Chrome",
-            "file": "${workspaceFolder}/index.html",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "type": "msedge",
-            "request": "launch",
-            "name": "Open Webpage in Edge",
-            "file": "${workspaceFolder}/index.html",
-            "webRoot": "${workspaceFolder}"
+            "name": "Launch Chrome",
+            "file": "${workspaceFolder}/index.html"
         },
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch against Local Server (http://localhost:8080)",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "name": "Launch Chrome (Legacy)",
+            "file": "${workspaceFolder}/index.html"
+        },
+        {
+            "type": "pwa-msedge",
+            "request": "launch",
+            "name": "Launch Edge",
+            "file": "${workspaceFolder}/index.html"
         }
     ]
 }
