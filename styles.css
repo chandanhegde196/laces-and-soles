@@ -1042,3 +1042,88 @@ body.owner-bar-active {
   padding-top: 48px;
 }
 
+/* Floating Back To Top Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 1.2rem;
+  z-index: 850;
+  background: rgba(18, 18, 18, 0.92);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+.back-to-top-btn i {
+  width: 18px;
+  height: 18px;
+}
+.back-to-top-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+.back-to-top-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+  transform: translateY(-3px);
+}
+
+/* Sticky Mobile Bottom Navigation Dock (Phones Only) */
+.mobile-bottom-dock {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-bottom-dock {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 890;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-glass-hover);
+    justify-content: space-around;
+    padding: 0.5rem 0.2rem;
+    box-shadow: 0 -4px 25px rgba(0,0,0,0.85);
+  }
+  .dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.2s ease;
+  }
+  .dock-item i {
+    width: 20px;
+    height: 20px;
+  }
+  .dock-item.active, .dock-item:hover {
+    color: var(--accent-gold);
+  }
+  body {
+    padding-bottom: 60px;
+  }
+}
+

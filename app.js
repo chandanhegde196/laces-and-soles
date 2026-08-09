@@ -291,6 +291,7 @@ let state = {
   appliedPromo: null,
   selectedQuickViewProduct: null,
   selectedSize: null,
+  displayLimit: 8,
   isOwnerAuthenticated: false,
   ownerPin: '8888',
   checkoutDetails: {
@@ -555,7 +556,22 @@ function renderProductGrid() {
     return 0;
   });
 
-  resultsCount.textContent = `Showing ${filtered.length} footwear drop${filtered.length === 1 ? '' : 's'}`;
+  const totalCount = filtered.length;
+  const visibleProducts = filtered.slice(0, state.displayLimit || 8);
+
+  resultsCount.textContent = `Showing ${visibleProducts.length} of ${totalCount} footwear drop${totalCount === 1 ? '' : 's'}`;
+
+  const loadMoreBox = document.getElementById('load-more-container');
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  if (loadMoreBox && loadMoreBtn) {
+    if (totalCount > visibleProducts.length) {
+      loadMoreBox.style.display = 'block';
+      const remaining = totalCount - visibleProducts.length;
+      loadMoreBtn.querySelector('span').textContent = `LOAD MORE DROPS (+${remaining})`;
+    } else {
+      loadMoreBox.style.display = 'none';
+    }
+  }
 
   if (filtered.length === 0) {
     grid.innerHTML = `
@@ -570,7 +586,7 @@ function renderProductGrid() {
     return;
   }
 
-  grid.innerHTML = filtered.map(product => {
+  grid.innerHTML = visibleProducts.map(product => {
     const isWishlisted = state.wishlist.some(item => item.id === product.id);
     const cs = getCardState(product.id);
     const isUnlisted = !product.inStock;
@@ -696,6 +712,31 @@ function setupEventListeners() {
     stockToggle.addEventListener('change', (e) => {
       state.inStockOnly = e.target.checked;
       renderProductGrid();
+    });
+  }
+
+  // Load More Drops Button Listener
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      state.displayLimit = (state.displayLimit || 8) + 8;
+      renderProductGrid();
+    });
+  }
+
+  // Floating Back to Top Button Listener
+  const backToTopBtn = document.getElementById('back-to-top-btn');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 350) {
+        backToTopBtn.classList.remove('hidden');
+      } else {
+        backToTopBtn.classList.add('hidden');
+      }
     });
   }
 

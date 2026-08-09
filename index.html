@@ -333,6 +333,14 @@
       <div class="product-grid" id="product-grid">
         <!-- Injected dynamically via app.js -->
       </div>
+
+      <!-- Load More Products Button -->
+      <div id="load-more-container" style="text-align: center; margin-top: 2rem; display: none;">
+        <button id="load-more-btn" class="btn btn-secondary btn-glow" style="padding: 0.8rem 2.2rem; font-family: var(--font-bebas); font-size: 1.2rem; letter-spacing: 0.05em; border-radius: var(--radius-full);">
+          <span>LOAD MORE DROPS</span>
+          <i data-lucide="chevron-down"></i>
+        </button>
+      </div>
     </section>
 
     <!-- 2. SPECIFIC DEPARTMENT COLUMNS -->
@@ -951,6 +959,32 @@
 
   <!-- Toast Container -->
   <div class="toast-container" id="toast-container"></div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top-btn" class="back-to-top-btn hidden" aria-label="Back to Top" title="Back to Top">
+    <i data-lucide="arrow-up"></i>
+    <span>TOP</span>
+  </button>
+
+  <!-- Sticky Mobile Bottom Navigation Dock (Mobile Phones Only) -->
+  <div class="mobile-bottom-dock" id="mobile-bottom-dock">
+    <a href="#hero" class="dock-item active" id="dock-home">
+      <i data-lucide="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="#catalog" class="dock-item" id="dock-catalog">
+      <i data-lucide="grid"></i>
+      <span>Drops</span>
+    </a>
+    <button class="dock-item" id="dock-wishlist" onclick="document.getElementById('wishlist-btn').click()">
+      <i data-lucide="heart"></i>
+      <span>Wishlist</span>
+    </button>
+    <button class="dock-item" id="dock-bag" onclick="document.getElementById('cart-btn').click()">
+      <i data-lucide="shopping-bag"></i>
+      <span>Bag</span>
+    </button>
+  </div>
 
   <!-- App Logic -->
   <script src="app.js"></script>
