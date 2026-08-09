@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LACES & SOLES — Official Footwear Store | www.lacesandsoles.com</title>
+  <meta name="description"
+    content="Official website and online catalog for Laces & Soles Gokul Road Hubli (lacesandsoles.com). Direct Instagram catalog integration for @laces.and.soles.">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="laces_and_soles_logo.png">
+  <!-- Google Fonts: Bebas Neue for Nike/Adidas titles + Outfit + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="splash-active">
+
+  <!-- REFINED SLEEK ELEGANT INTRO SPLASH SCREEN WITH RING SPINNER & TONED-DOWN GLOW -->
+  <div class="adidas-intro-splash" id="adidas-intro-splash">
+    <div class="splash-loader-box">
+      <img src="laces_and_soles_logo.png" alt="Laces & Soles Official Logo" class="splash-logo-avatar">
+    </div>
+
+    <div class="splash-title-wrap">
+      <h1 class="splash-brand-title">LACES <span class="gold-amp">&</span> SOLES</h1>
+      <div class="splash-slogan">AUTHENTIC FOOTWEAR EXPERIENCE</div>
+      <div class="splash-location">GOKUL ROAD, HUBLI • @LACES.AND.SOLES</div>
+    </div>
+
+    <div class="splash-progress-wrapper">
+      <div class="splash-progress-bar">
+        <div class="splash-progress-fill" id="splash-progress-fill"></div>
+      </div>
+      <span class="splash-percent-text" id="splash-percent-text">LOADING 0%</span>
+    </div>
+
+    <button class="skip-intro-btn" id="skip-intro-btn">ENTER STORE →</button>
+  </div>
+
+  <!-- EYE-CATCHING CONTINUOUS SLOW-MOVING MARQUEE TICKER ABOVE STORE NAME -->
+  <div class="announcement-bar">
+    <div class="announcement-marquee-track">
+      <div class="marquee-group">
+        <span class="marquee-item">🌐 <span class="marquee-highlight">OFFICIAL DOMAIN:</span>
+          www.lacesandsoles.com</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">🔥 <span class="marquee-highlight">EXCLUSIVE DROPS:</span> NIKE • AIR JORDAN • ADIDAS
+          • YEEZY • SLIDES</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">📍 <span class="marquee-highlight">HUBLI STORE:</span> Opp. RNS Motors, Gokul Road,
+          Hubli (Open 10 AM - 10 PM)</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">📸 <span class="marquee-highlight">INSTAGRAM STORE:</span> @laces.and.soles (Direct
+          DM Orders Open)</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">⚡ <span class="marquee-highlight">STORE PRICING:</span> ₹1,299 – ₹3,499 Real Store
+          Market Value</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">🚚 <span class="marquee-highlight">FREE EXPRESS SHIPPING:</span> On orders over
+          ₹1,500 Across India</span>
+        <span class="marquee-dot">•</span>
+      </div>
+
+      <!-- Duplicated Seamless Loop Group -->
+      <div class="marquee-group">
+        <span class="marquee-item">🌐 <span class="marquee-highlight">OFFICIAL DOMAIN:</span>
+          www.lacesandsoles.com</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">🔥 <span class="marquee-highlight">EXCLUSIVE DROPS:</span> NIKE • AIR JORDAN • ADIDAS
+          • YEEZY • SLIDES</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">📍 <span class="marquee-highlight">HUBLI STORE:</span> Opp. RNS Motors, Gokul Road,
+          Hubli (Open 10 AM - 10 PM)</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">📸 <span class="marquee-highlight">INSTAGRAM STORE:</span> @laces.and.soles (Direct
+          DM Orders Open)</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">⚡ <span class="marquee-highlight">STORE PRICING:</span> ₹1,299 – ₹3,499 Real Store
+          Market Value</span>
+        <span class="marquee-dot">•</span>
+        <span class="marquee-item">🚚 <span class="marquee-highlight">FREE EXPRESS SHIPPING:</span> On orders over
+          ₹1,500 Across India</span>
+        <span class="marquee-dot">•</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="site-header" id="site-header">
+    <div class="nav-container">
+      <!-- Highlighted Bold Brand Logo with Eye-Catching Moving Title Badge Above -->
+      <a href="#" class="brand-logo" id="brand-logo">
+        <div class="logo-icon-box">
+          <img src="laces_and_soles_logo.png" alt="Laces & Soles Official Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-title-group">
+          <span class="brand-main-title">LACES <span class="gold-amp">&</span> SOLES</span>
+          <span class="brand-tagline">FOOTWEAR CO. • GOKUL ROAD, HUBLI</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#catalog" class="nav-link">All Products</a>
+        <a href="#instagram-feed" class="nav-link">Instagram Feed</a>
+        <a href="#hubli-store" class="nav-link">Hubli Store</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Replay Intro Button -->
+        <button class="action-btn" id="replay-intro-btn" title="Replay Intro Animation" aria-label="Replay Intro">
+          <i data-lucide="play-circle"></i>
+        </button>
+
+        <!-- Search bar -->
+        <div class="search-box">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" id="search-input" placeholder="Search Nike, Jordan, Yeezy, Slides..." autocomplete="off">
+          <button class="clear-search" id="clear-search" aria-label="Clear Search"><i data-lucide="x"></i></button>
+        </div>
+
+        <!-- Admin / Manage Products Button -->
+        <button class="action-btn" id="admin-panel-btn" title="Manage / List / Unlist Products"
+          aria-label="Admin Manager">
+          <i data-lucide="settings"></i>
+        </button>
+
+        <!-- Instagram Button -->
+        <a href="https://www.instagram.com/laces.and.soles/" target="_blank" rel="noopener"
+          class="action-btn insta-hdr-btn" title="Follow @laces.and.soles on Instagram">
+          <i data-lucide="instagram"></i>
+        </a>
+
+        <!-- Wishlist button -->
+        <button class="action-btn" id="wishlist-btn" title="Saved Favorites" aria-label="Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge" id="wishlist-badge">0</span>
+        </button>
+
+        <!-- Cart button -->
+        <button class="action-btn cart-btn" id="cart-btn" title="Shopping Cart" aria-label="Shopping Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge" id="cart-badge">0</span>
+          <span class="cart-total-preview" id="cart-total-preview">₹0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+    <div class="mobile-nav-content">
+      <button class="close-btn" id="close-mobile-nav"><i data-lucide="x"></i></button>
+      <div class="mobile-brand">LACES <span class="gold-amp">&</span> SOLES HUBLI</div>
+      <div class="mobile-links">
+        <a href="#hero" class="mobile-link">Home</a>
+        <a href="#catalog" class="mobile-link">All Products</a>
+        <a href="#instagram-feed" class="mobile-link">Instagram Feed (@laces.and.soles)</a>
+        <a href="#hubli-store" class="mobile-link">Hubli Store Location</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Nike/Adidas Official Fusion Hero Intro -->
+    <section class="hero-section" id="hero">
+      <div class="adidas-stripes-bg">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="hero-bg-glow"></div>
+
+      <div class="hero-container">
+        <div class="hero-text-col">
+          <div class="hero-tag">
+            <span class="tag-pulse"></span>
+            <span>AUTHENTIC FOOTWEAR • OFFICIAL STORE</span>
+          </div>
+
+          <h1 class="hero-nike-title">
+            YOU GOT THIS. <br>
+            <span class="gradient-text">JUST DO IT.</span>
+          </h1>
+
+          <p class="hero-slogan-sub">
+            "We gave the world an original. You gave us a thousand back. Impossible is nothing."
+          </p>
+
+          <p class="hero-description">
+            The official web application for Laces & Soles Hubli (lacesandsoles.com). Direct Instagram catalog
+            integration for `@laces.and.soles`. Explore authentic sneakers, slides, slippers, and handcrafted shoes at
+            real store market prices (₹1,299 – ₹3,499).
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#catalog" class="btn btn-primary btn-glow">
+              <span>EXPLORE ALL DROPS</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+            <a href="https://www.instagram.com/laces.and.soles/" target="_blank" rel="noopener"
+              class="btn btn-secondary">
+              <i data-lucide="instagram"></i>
+              <span>VISIT @LACES.AND.SOLES</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">₹1.2K+</span>
+              <span class="stat-label">Real Store Market Prices</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">Gokul Rd</span>
+              <span class="stat-label">Opposite RNS Motors, Hubli</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">DM & Store</span>
+              <span class="stat-label">Instant IG DM & WhatsApp Order</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual-col">
+          <div class="hero-image-card">
+            <span class="hero-card-badge">INSTAGRAM FEATURED POST</span>
+            <img src="jordan_chicago_real.jpg" alt="Air Jordan 1 Retro High Chicago" class="hero-real-img">
+            <div class="hero-card-footer">
+              <div>
+                <strong class="hero-card-name">AIR JORDAN 1 HIGH CHICAGO</strong>
+                <span class="hero-card-sub">Varsity Red & White Leather • Hype Drop</span>
+              </div>
+              <span class="hero-card-price">₹3,299</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brands Logo Strip -->
+    <section class="brands-strip" id="brands">
+      <div class="brands-container">
+        <span class="brands-title">STORE BRANDS:</span>
+        <div class="brand-logos">
+          <span class="brand-item">NIKE</span>
+          <span class="brand-item">AIR JORDAN</span>
+          <span class="brand-item">ADIDAS</span>
+          <span class="brand-item">YEEZY SLIDES</span>
+          <span class="brand-item">NEW BALANCE</span>
+          <span class="brand-item">VANS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. MAIN PRODUCT CATALOG DISPLAY SECTION FIRST -->
+    <section class="catalog-section" id="catalog">
+      <div class="section-header">
+        <span class="section-subtitle">LIVE STORE CATALOG</span>
+        <h2 class="section-title">ALL FOOTWEAR & SLIDES DROPS</h2>
+        <p class="section-desc">Browse authentic Nike, Air Jordan, Adidas, Yeezy, and slide collections available at
+          Gokul Road Hubli store.</p>
+      </div>
+
+      <!-- Controls & Filter Toolbar -->
+      <div class="catalog-controls">
+        <div class="category-pills" id="category-pills">
+          <button class="pill active" data-category="all">All Products</button>
+          <button class="pill" data-category="nike-jordan">Nike & Jordan</button>
+          <button class="pill" data-category="adidas-yeezy">Adidas & Yeezy</button>
+          <button class="pill" data-category="slides">Slides & Slippers</button>
+          <button class="pill" data-category="athletic">Running & Sports</button>
+          <button class="pill" data-category="formal">Formal & Leather</button>
+        </div>
+
+        <div class="filter-dropdowns">
+          <div class="sort-wrapper">
+            <label for="sort-select">Sort By:</label>
+            <select id="sort-select" class="custom-select">
+              <option value="featured">Featured Picks</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="newest">Newest Arrivals</option>
+            </select>
+          </div>
+
+          <div class="stock-toggle-wrapper">
+            <label class="toggle-switch">
+              <input type="checkbox" id="in-stock-only">
+              <span class="slider"></span>
+            </label>
+            <span class="toggle-label">Hubli Store In-Stock Only</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-bar">
+        <span id="results-count">Showing products</span>
+        <div class="active-filter-tags" id="active-tags"></div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="product-grid" id="product-grid">
+        <!-- Injected dynamically via app.js -->
+      </div>
+    </section>
+
+    <!-- 2. SPECIFIC DEPARTMENT COLUMNS -->
+    <section class="categories-section" id="categories-section">
+      <div class="section-header">
+        <span class="section-subtitle">STORE DEPARTMENTS</span>
+        <h2 class="section-title">BROWSE BY CATEGORY</h2>
+      </div>
+
+      <div class="category-grid-4col">
+        <div class="cat-card" onclick="filterByCategory('nike-jordan')">
+          <img src="jordan_chicago_real.jpg" alt="Nike & Air Jordan">
+          <div class="cat-card-overlay">
+            <span class="cat-tag">HYPE</span>
+            <h3>NIKE & AIR JORDAN</h3>
+            <p>Jordan 1s, Air Force 1s & Dunks — ₹2,299+</p>
+            <span class="cat-link">Shop Nike & Jordan →</span>
+          </div>
+        </div>
+
+        <div class="cat-card" onclick="filterByCategory('adidas-yeezy')">
+          <img src="adidas_ultraboost_light.jpg" alt="Adidas & Yeezy">
+          <div class="cat-card-overlay">
+            <span class="cat-tag">BOOST</span>
+            <h3>ADIDAS & YEEZY</h3>
+            <p>Ultraboost Light & Yeezy Kicks — ₹2,599+</p>
+            <span class="cat-link">Shop Adidas →</span>
+          </div>
+        </div>
+
+        <div class="cat-card" onclick="filterByCategory('slides')">
+          <img src="yeezy_slides.jpg" alt="Slides & Slippers">
+          <div class="cat-card-overlay">
+            <span class="cat-tag">DAILY COMFORT</span>
+            <h3>SLIDES & SLIPPERS</h3>
+            <p>Yeezy Slides & Comfort Slippers — ₹1,299+</p>
+            <span class="cat-link">Shop Slides & Slippers →</span>
+          </div>
+        </div>
+
+        <div class="cat-card" onclick="filterByCategory('formal')">
+          <img src="oxford_real.jpg" alt="Formal Leather & Casuals">
+          <div class="cat-card-overlay">
+            <span class="cat-tag">LEATHER</span>
+            <h3>FORMAL & CASUAL</h3>
+            <p>Italian Leather Oxfords & Vans — ₹1,799+</p>
+            <span class="cat-link">Shop Formal & Casual →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. INSTAGRAM DIRECT POSTS GRID (MOVED LATER AFTER PRODUCTS) -->
+    <section class="instagram-section" id="instagram-feed">
+      <div class="section-header">
+        <span class="section-subtitle">LIVE INSTAGRAM CATALOG</span>
+        <h2 class="section-title">POSTS FROM @LACES.AND.SOLES</h2>
+        <p class="section-desc">Real posts & inventory updates straight from our Instagram page. Click any post to DM us
+          directly on Instagram!</p>
+        <a href="https://www.instagram.com/laces.and.soles/" target="_blank" rel="noopener"
+          class="btn btn-primary btn-glow mt-4">
+          <i data-lucide="instagram"></i>
+          <span>OPEN INSTAGRAM @LACES.AND.SOLES</span>
+        </a>
+      </div>
+
+      <div class="insta-grid">
+        <div class="insta-card" onclick="window.open('https://www.instagram.com/laces.and.soles/', '_blank')">
+          <img src="jordan_chicago_real.jpg" alt="Air Jordan 1 High Chicago - Instagram Post">
+          <div class="insta-hover-overlay">
+            <i data-lucide="instagram"></i>
+            <span>@laces.and.soles</span>
+            <p style="font-size: 0.78rem; text-align: center; color: #fff; padding: 0 0.5rem;">"Air Jordan 1 High
+              Chicago Restock! DM to order."</p>
+            <span class="post-likes">❤️ 1,420 Likes</span>
+          </div>
+        </div>
+
+        <div class="insta-card" onclick="window.open('https://www.instagram.com/laces.and.soles/', '_blank')">
+          <img src="adidas_ultraboost_light.jpg" alt="Adidas Ultraboost Light - Instagram Post">
+          <div class="insta-hover-overlay">
+            <i data-lucide="instagram"></i>
+            <span>@laces.and.soles</span>
+            <p style="font-size: 0.78rem; text-align: center; color: #fff; padding: 0 0.5rem;">"Adidas Ultraboost Light
+              energy return cushion!"</p>
+            <span class="post-likes">❤️ 1,180 Likes</span>
+          </div>
+        </div>
+
+        <div class="insta-card" onclick="window.open('https://www.instagram.com/laces.and.soles/', '_blank')">
+          <img src="yeezy_slides.jpg" alt="Yeezy Foam Slides - Instagram Post">
+          <div class="insta-hover-overlay">
+            <i data-lucide="instagram"></i>
+            <span>@laces.and.soles</span>
+            <p style="font-size: 0.78rem; text-align: center; color: #fff; padding: 0 0.5rem;">"Yeezy Foam Comfort
+              Slides. Available at Gokul Rd!"</p>
+            <span class="post-likes">❤️ 1,890 Likes</span>
+          </div>
+        </div>
+
+        <div class="insta-card" onclick="window.open('https://www.instagram.com/laces.and.soles/', '_blank')">
+          <img src="nike_air_force.jpg" alt="Nike Air Force 1 White - Instagram Post">
+          <div class="insta-hover-overlay">
+            <i data-lucide="instagram"></i>
+            <span>@laces.and.soles</span>
+            <p style="font-size: 0.78rem; text-align: center; color: #fff; padding: 0 0.5rem;">"Air Force 1 Triple White
+              Low. Tap DM to buy!"</p>
+            <span class="post-likes">❤️ 2,150 Likes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. VISIT HUBLI STORE LOCATION SECTION -->
+    <section class="hubli-store-section" id="hubli-store">
+      <div class="hubli-store-container">
+        <div class="store-info-col">
+          <span class="badge-tag">HUBLI FLAGSHIP LOCATION</span>
+          <h2 class="section-title">VISIT OUR GOKUL ROAD STORE</h2>
+          <p class="store-lead">
+            Experience our full collection of sneakers, slides, and leather shoes in person. Verified stock with instant
+            store pickup in Hubli.
+          </p>
+
+          <div class="store-details-card">
+            <div class="detail-row">
+              <i data-lucide="globe" class="gold-icon"></i>
+              <div>
+                <strong>Official Web Store:</strong>
+                <p style="color: var(--accent-gold); font-weight: 700;">www.lacesandsoles.com</p>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <i data-lucide="map-pin" class="gold-icon"></i>
+              <div>
+                <strong>Store Address:</strong>
+                <p>Opposite RNS Motors, Gokul Road, Hubli, Karnataka 580030</p>
+                <p class="sub-text">(Near Urban Oasis Mall Junction)</p>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <i data-lucide="clock" class="gold-icon"></i>
+              <div>
+                <strong>Store Hours:</strong>
+                <p>Monday – Sunday: 10:00 AM – 10:00 PM IST</p>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <i data-lucide="phone-call" class="gold-icon"></i>
+              <div>
+                <strong>Store Helpline / WhatsApp:</strong>
+                <p>+91 98765 43210 (Direct Support)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-cta-buttons">
+            <a href="https://maps.google.com/?q=Gokul+Road+Hubli+RNS+Motors" target="_blank" rel="noopener"
+              class="btn btn-primary">
+              <i data-lucide="navigation"></i>
+              <span>GET DIRECTIONS ON MAPS</span>
+            </a>
+            <button class="btn btn-secondary" onclick="openWhatsAppOrder('Store Visit / Availability')">
+              <i data-lucide="message-circle"></i>
+              <span>WHATSAPP HUBLI STORE</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="store-image-col">
+          <div class="store-map-card">
+            <div class="map-badge">📍 GOKUL ROAD STORE</div>
+            <img src="jordan_chicago_real.jpg" alt="Laces and Soles Hubli Store Front">
+            <div class="map-footer">
+              <div>
+                <strong>LACES & SOLES HUBLI</strong>
+                <span>www.lacesandsoles.com • Gokul Road</span>
+              </div>
+              <span class="open-pill">OPEN TODAY (10 AM - 10 PM)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col brand-col">
+        <a href="#" class="brand-logo">
+          <div class="logo-icon-box">
+            <img src="laces_and_soles_logo.png" alt="Laces & Soles Official Logo" class="brand-logo-img">
+          </div>
+          <div class="brand-title-group">
+            <span class="brand-main-title">LACES <span class="gold-amp">&</span> SOLES</span>
+          </div>
+        </a>
+        <p class="footer-desc">
+          Hubli's premier store for authentic Nike, Air Jordan, Adidas, Yeezy, slides, slippers, and handcrafted leather
+          footwear.
+        </p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/laces.and.soles/" target="_blank" rel="noopener" aria-label="Instagram"><i
+              data-lucide="instagram"></i></a>
+          <a href="#" onclick="openWhatsAppOrder('Footer link'); return false;" aria-label="WhatsApp"><i
+              data-lucide="message-circle"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Departments</h4>
+        <ul>
+          <li><a href="#catalog">Sneakers & Hype Drops</a></li>
+          <li><a href="#catalog">Slides, Slippers & Flip-Flops</a></li>
+          <li><a href="#catalog">Performance Running Shoes</a></li>
+          <li><a href="#catalog">Formal Leather Oxfords</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hubli Store Info</h4>
+        <ul>
+          <li><a href="#hubli-store">www.lacesandsoles.com</a></li>
+          <li><a href="#hubli-store">Gokul Road Store Location</a></li>
+          <li><a href="https://www.instagram.com/laces.and.soles/" target="_blank">Instagram @laces.and.soles</a></li>
+          <li><a href="#" onclick="openWhatsAppOrder('Size query'); return false;">Size & Fit Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Authenticity Guarantee</h4>
+        <div class="guarantee-box">
+          <i data-lucide="shield-check" class="guarantee-icon"></i>
+          <div>
+            <strong>100% Real Authentic Stock</strong>
+            <p>Every single sneaker and pair of slides is 100% genuine and verified.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 LACES & SOLES (lacesandsoles.com). All Rights Reserved.</p>
+      <div class="payment-methods">
+        <span>UPI / GPay</span>
+        <span>PhonePe</span>
+        <span>Credit / Debit Card</span>
+        <span>In-Store Cash</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin Panel Modal -->
+  <div class="modal-overlay" id="admin-modal">
+    <div class="modal-card" style="max-width: 650px;">
+      <button class="modal-close" id="close-admin"><i data-lucide="x"></i></button>
+      <div style="padding: 2rem;">
+        <h2 style="font-family: var(--font-bebas); font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          STORE PRODUCT MANAGER (ADMIN)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem;">Easily list, unlist, delete, or
+          add new shoe models to your store catalog.</p>
+
+        <form id="add-product-form"
+          style="background: var(--bg-card); padding: 1.2rem; border-radius: var(--radius-md); border: 1px solid var(--border-glass); margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+          <strong>Add New Shoe / Slide Drop:</strong>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+            <input type="text" id="new-prod-name" placeholder="Shoe Name (e.g. Nike Dunk)" required
+              style="padding: 0.5rem; background: #000; border: 1px solid var(--border-glass); border-radius: 4px;">
+            <input type="text" id="new-prod-brand" placeholder="Brand (e.g. Nike)" required
+              style="padding: 0.5rem; background: #000; border: 1px solid var(--border-glass); border-radius: 4px;">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+            <select id="new-prod-category"
+              style="padding: 0.5rem; background: #000; border: 1px solid var(--border-glass); border-radius: 4px;">
+              <option value="nike-jordan">Nike & Jordan</option>
+              <option value="adidas-yeezy">Adidas & Yeezy</option>
+              <option value="slides">Slides & Slippers</option>
+              <option value="athletic">Athletic & Running</option>
+              <option value="formal">Formal Leather</option>
+            </select>
+            <input type="number" id="new-prod-price" placeholder="Price in ₹ (e.g. 2499)" required
+              style="padding: 0.5rem; background: #000; border: 1px solid var(--border-glass); border-radius: 4px;">
+          </div>
+          <input type="text" id="new-prod-image" placeholder="Image File Path (e.g. jordan_chicago_real.jpg)"
+            style="padding: 0.5rem; background: #000; border: 1px solid var(--border-glass); border-radius: 4px;">
+          <button type="submit" class="btn btn-primary btn-sm">Add Product to Store</button>
+        </form>
+
+        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Current Store Products:</h3>
+        <div id="admin-product-list"
+          style="display: flex; flex-direction: column; gap: 0.8rem; max-height: 250px; overflow-y: auto;">
+          <!-- JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal-overlay" id="quickview-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="close-quickview"><i data-lucide="x"></i></button>
+      <div class="modal-body" id="quickview-body">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="drawer-overlay" id="cart-drawer">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i data-lucide="shopping-bag"></i>
+          <h3>YOUR BAG (<span id="cart-item-count">0</span>)</h3>
+        </div>
+        <button class="drawer-close" id="close-cart"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="free-shipping-progress">
+        <span id="free-shipping-text">Add ₹1,500 more for <strong>FREE Express Shipping across India</strong></span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="shipping-progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="drawer-content" id="cart-items-container">
+        <!-- Cart Items -->
+      </div>
+
+      <div class="drawer-footer">
+        <div class="promo-box">
+          <input type="text" id="promo-input" placeholder="Promo code (e.g. LACES20)">
+          <button id="apply-promo-btn">Apply</button>
+        </div>
+        <div class="promo-applied-tag hidden" id="promo-applied-tag">
+          <span>🎉 LACES20 Applied (20% OFF)</span>
+          <button id="remove-promo">✕</button>
+        </div>
+
+        <div class="summary-rows">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">₹0</span>
+          </div>
+          <div class="summary-row" id="discount-row" style="display: none;">
+            <span>Discount (20%)</span>
+            <span id="cart-discount" class="gold-text">-₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery / Shipping</span>
+            <span id="cart-shipping">Calculated at checkout</span>
+          </div>
+          <div class="summary-row total-row">
+            <span>Estimated Total</span>
+            <span id="cart-grand-total">₹0</span>
+          </div>
+        </div>
+
+        <div class="btn-checkout-group">
+          <button class="btn btn-primary btn-block btn-glow" id="checkout-btn">
+            <span>PROCEED TO CHECKOUT</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+
+          <button class="btn btn-secondary btn-block mt-2" id="whatsapp-cart-btn" onclick="orderCartViaWhatsApp()">
+            <i data-lucide="message-circle"></i>
+            <span>ORDER BAG VIA WHATSAPP</span>
+          </button>
+        </div>
+
+        <p class="secure-checkout-note">🔒 Guaranteed 100% Authentic • Hubli Store Pickup Available</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wishlist Drawer -->
+  <div class="drawer-overlay" id="wishlist-drawer">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i data-lucide="heart"></i>
+          <h3>SAVED FAVORITES (<span id="wishlist-item-count">0</span>)</h3>
+        </div>
+        <button class="drawer-close" id="close-wishlist"><i data-lucide="x"></i></button>
+      </div>
+      <div class="drawer-content" id="wishlist-items-container">
+        <!-- Wishlist items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-card checkout-card">
+      <button class="modal-close" id="close-checkout"><i data-lucide="x"></i></button>
+      <div class="checkout-header">
+        <h2>LACES & SOLES — SECURE CHECKOUT</h2>
+        <div class="checkout-steps">
+          <div class="step active" id="step-1-label">1. Delivery Info</div>
+          <div class="step" id="step-2-label">2. Payment</div>
+          <div class="step" id="step-3-label">3. Order Receipt</div>
+        </div>
+      </div>
+
+      <div class="checkout-body">
+        <div class="checkout-step-panel" id="checkout-step-1">
+          <h3>Delivery Address or Store Pickup</h3>
+          <form id="shipping-form" class="checkout-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="customer-name" required placeholder="Chandan K">
+              </div>
+              <div class="form-group">
+                <label>Mobile Number (For Delivery & WhatsApp)</label>
+                <input type="tel" id="customer-phone" required placeholder="+91 98765 43210">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Delivery Option</label>
+              <select class="custom-select w-full" id="delivery-method-select" style="width: 100%; padding: 0.75rem;">
+                <option value="courier">Pan-India Express Delivery (2-4 Days)</option>
+                <option value="pickup">In-Store Pickup (Gokul Road Store, Hubli)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Full Delivery Address (Street, Landmark, City, State, Pincode)</label>
+              <input type="text" id="customer-address" required
+                placeholder="Gokul Road, Opp. RNS Motors, Hubli, Karnataka 580030">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-glow">
+              <span>CONTINUE TO PAYMENT</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </form>
+        </div>
+
+        <div class="checkout-step-panel hidden" id="checkout-step-2">
+          <h3>Select Payment Method</h3>
+          <div class="payment-options" id="payment-options-group">
+            <label class="payment-option selected" data-method="upi">
+              <input type="radio" name="payment-method" value="upi" checked>
+              <i data-lucide="qr-code"></i>
+              <span>UPI / QR / GPay / PhonePe</span>
+            </label>
+            <label class="payment-option" data-method="card">
+              <input type="radio" name="payment-method" value="card">
+              <i data-lucide="credit-card"></i>
+              <span>Credit / Debit Card</span>
+            </label>
+            <label class="payment-option" data-method="cod">
+              <input type="radio" name="payment-method" value="cod">
+              <i data-lucide="truck"></i>
+              <span>Cash on Delivery (COD)</span>
+            </label>
+          </div>
+
+          <form id="payment-form" class="checkout-form mt-4">
+            <!-- UPI Payment Details -->
+            <div id="payment-fields-upi" class="payment-subpanel">
+              <div class="upi-qr-card">
+                <div class="qr-image-wrap">
+                  <img id="upi-qr-image" src="" alt="Scan & Pay UPI QR Code" class="upi-qr-img">
+                  <div class="qr-badge"><i data-lucide="zap"></i> Instant UPI Pay</div>
+                </div>
+                <div class="qr-details">
+                  <div class="qr-merchant"><strong>Laces & Soles Hubli</strong> (@laces.and.soles)</div>
+                  <div class="qr-upi-id">UPI ID: <code>lacesandsoles@upi</code></div>
+                  <div class="qr-instruction">Scan with Google Pay, PhonePe, Paytm, or BHIM to pay instantly.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Payment Details -->
+            <div id="payment-fields-card" class="payment-subpanel hidden">
+              <div class="form-group">
+                <label>Cardholder Name</label>
+                <input type="text" id="card-name-input" placeholder="Chandan K">
+              </div>
+              <div class="form-group">
+                <label>Card Number</label>
+                <input type="text" id="card-number-input" placeholder="4532 •••• •••• 8892" maxlength="19">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Expiry (MM/YY)</label>
+                  <input type="text" id="card-expiry-input" placeholder="12/28" maxlength="5">
+                </div>
+                <div class="form-group">
+                  <label>CVV</label>
+                  <input type="password" id="card-cvv-input" placeholder="•••" maxlength="4">
+                </div>
+              </div>
+            </div>
+
+            <!-- COD Details -->
+            <div id="payment-fields-cod" class="payment-subpanel hidden">
+              <div class="cod-banner">
+                <i data-lucide="shield-check" class="cod-icon"></i>
+                <div>
+                  <strong>Pay Cash or UPI on Delivery / Store Pickup</strong>
+                  <p>You can verify your sneaker drop upon arrival before making payment at Gokul Road store or to
+                    courier.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-final-summary">
+              <div class="summary-line"><span>Items Subtotal:</span><span id="co-subtotal">₹0</span></div>
+              <div class="summary-line"><span>Delivery / Shipping:</span><span id="co-shipping">FREE</span></div>
+              <div class="summary-line total"><span>Total Amount Payable:</span><span id="co-total">₹0</span></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-glow" id="pay-now-btn">
+              <span>CONFIRM & PLACE ORDER</span>
+              <i data-lucide="check-circle"></i>
+            </button>
+          </form>
+        </div>
+
+        <div class="checkout-step-panel hidden text-center" id="checkout-step-3">
+          <div class="success-icon"><i data-lucide="check-circle-2"></i></div>
+          <h2>ORDER CONFIRMED!</h2>
+          <p class="order-id">Order ID: <strong id="confirmed-order-id">#LS-HUB-984210</strong></p>
+          <p class="success-msg">Thank you for shopping at Laces & Soles Hubli! Click below to send your order receipt
+            directly to our Gokul Road store on WhatsApp.</p>
+
+          <div class="receipt-box" id="receipt-summary">
+            <!-- Receipt breakdown -->
+          </div>
+
+          <div class="receipt-actions-group">
+            <a id="whatsapp-order-btn" href="#" target="_blank" class="btn btn-whatsapp btn-block btn-glow mt-3">
+              <i data-lucide="message-square"></i>
+              <span>SEND ORDER DETAILS TO STORE ON WHATSAPP</span>
+            </a>
+
+            <div class="receipt-secondary-btns mt-2" style="display: flex; gap: 0.5rem; justify-content: center;">
+              <button class="btn btn-secondary btn-sm" id="copy-receipt-btn">
+                <i data-lucide="copy"></i> Copy Order Text
+              </button>
+              <button class="btn btn-primary btn-sm" id="finish-checkout-btn">
+                Continue Shopping
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- App Logic -->
+  <script src="app.js"></script>
+</body>
+
+</html>
