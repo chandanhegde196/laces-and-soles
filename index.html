@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LACES & SOLES — Official Footwear Store | www.lacesandsoles.com</title>
+  <title>LACES & SOLES — Official Footwear Store</title>
   <meta name="description"
-    content="Official website and online catalog for Laces & Soles Gokul Road Hubli (lacesandsoles.com). Direct Instagram catalog integration for @laces.and.soles.">
+    content="Online catalog for Laces & Soles Gokul Road Hubli. Direct Instagram catalog integration for @laces.and.soles.">
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="laces_and_soles_logo.png">
   <!-- Google Fonts: Bebas Neue for Nike/Adidas titles + Outfit + Plus Jakarta Sans -->
@@ -72,8 +72,7 @@
   <div class="announcement-bar">
     <div class="announcement-marquee-track">
       <div class="marquee-group">
-        <span class="marquee-item">🌐 <span class="marquee-highlight">OFFICIAL DOMAIN:</span>
-          www.lacesandsoles.com</span>
+        <span class="marquee-item">📍 <span class="marquee-highlight">HUBLI STORE:</span> Opp. RNS Motors, Gokul Road, Hubli (Open 10 AM - 10 PM)</span>
         <span class="marquee-dot">•</span>
         <span class="marquee-item">🔥 <span class="marquee-highlight">EXCLUSIVE DROPS:</span> NIKE • AIR JORDAN • ADIDAS
           • YEEZY • SLIDES</span>
@@ -94,8 +93,7 @@
 
       <!-- Duplicated Seamless Loop Group -->
       <div class="marquee-group">
-        <span class="marquee-item">🌐 <span class="marquee-highlight">OFFICIAL DOMAIN:</span>
-          www.lacesandsoles.com</span>
+        <span class="marquee-item">📍 <span class="marquee-highlight">HUBLI STORE:</span> Opp. RNS Motors, Gokul Road, Hubli (Open 10 AM - 10 PM)</span>
         <span class="marquee-dot">•</span>
         <span class="marquee-item">🔥 <span class="marquee-highlight">EXCLUSIVE DROPS:</span> NIKE • AIR JORDAN • ADIDAS
           • YEEZY • SLIDES</span>
@@ -468,14 +466,6 @@
 
           <div class="store-details-card">
             <div class="detail-row">
-              <i data-lucide="globe" class="gold-icon"></i>
-              <div>
-                <strong>Official Web Store:</strong>
-                <p style="color: var(--accent-gold); font-weight: 700;">www.lacesandsoles.com</p>
-              </div>
-            </div>
-
-            <div class="detail-row">
               <i data-lucide="map-pin" class="gold-icon"></i>
               <div>
                 <strong>Store Address:</strong>
@@ -521,7 +511,7 @@
             <div class="map-footer">
               <div>
                 <strong>LACES & SOLES HUBLI</strong>
-                <span>www.lacesandsoles.com • Gokul Road</span>
+                <span>@laces.and.soles • Gokul Road</span>
               </div>
               <span class="open-pill">OPEN TODAY (10 AM - 10 PM)</span>
             </div>
@@ -568,7 +558,6 @@
       <div class="footer-col">
         <h4>Hubli Store Info</h4>
         <ul>
-          <li><a href="#hubli-store">www.lacesandsoles.com</a></li>
           <li><a href="#hubli-store">Gokul Road Store Location</a></li>
           <li><a href="https://www.instagram.com/laces.and.soles/" target="_blank">Instagram @laces.and.soles</a></li>
           <li><a href="#" onclick="openWhatsAppOrder('Size query'); return false;">Size & Fit Guide</a></li>
@@ -588,7 +577,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>© 2026 LACES & SOLES (lacesandsoles.com). All Rights Reserved.</p>
+      <p>© 2026 LACES & SOLES. All Rights Reserved.</p>
       <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
         <div class="payment-methods">
           <span>UPI / GPay</span>
@@ -690,9 +679,21 @@
             <input type="number" id="new-prod-price" placeholder="Price in ₹ (e.g. 2499)" required
               style="padding: 0.5rem; background: #000; border: 1px solid var(--border-glass); border-radius: 4px;">
           </div>
-          <input type="text" id="new-prod-image" placeholder="Image File Path (e.g. jordan_chicago_real.jpg)"
-            style="padding: 0.5rem; background: #000; border: 1px solid var(--border-glass); border-radius: 4px;">
-          <button type="submit" class="btn btn-primary btn-sm">Add Product to Store</button>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+            <label style="font-size: 0.85rem; font-weight: 700; color: var(--accent-gold); display: flex; align-items: center; gap: 4px;">
+              <i data-lucide="image" style="width: 16px; height: 16px;"></i>
+              <span>Select Product Photo from Device Gallery:</span>
+            </label>
+            <div style="display: flex; gap: 0.8rem; align-items: center;">
+              <input type="file" id="new-prod-file-input" accept="image/*"
+                style="padding: 0.6rem; background: #000; border: 1px solid var(--border-glass-hover); border-radius: 4px; color: #fff; flex: 1; cursor: pointer;">
+              <div id="image-preview-box" style="width: 52px; height: 52px; border-radius: 6px; border: 1px dashed var(--accent-gold); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.6); overflow: hidden; flex-shrink: 0;">
+                <span id="preview-placeholder" style="font-size: 0.65rem; color: var(--text-dim); text-align: center;">No Image</span>
+                <img id="new-prod-preview" style="width: 100%; height: 100%; object-fit: cover; display: none;" alt="Selected product image preview">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm mt-1">Add Product to Store</button>
         </form>
 
         <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Current Store Products:</h3>
@@ -738,8 +739,12 @@
 
       <div class="drawer-footer">
         <div class="promo-box">
-          <input type="text" id="promo-input" placeholder="Promo code (e.g. LACES20)">
+          <input type="text" id="promo-input" placeholder="Promo code">
           <button id="apply-promo-btn">Apply</button>
+        </div>
+        <div class="promo-error-tag hidden" id="promo-error-tag">
+          <i data-lucide="alert-circle" style="width: 14px; height: 14px; flex-shrink: 0;"></i>
+          <span id="promo-error-text">Invalid Promo Code</span>
         </div>
         <div class="promo-applied-tag hidden" id="promo-applied-tag">
           <span>🎉 LACES10 Applied (10% OFF)</span>
@@ -818,24 +823,24 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" id="customer-name" required placeholder="Chandan K">
+                <input type="text" id="customer-name" required placeholder="Full Name">
               </div>
               <div class="form-group">
                 <label>Mobile Number (For Delivery & WhatsApp)</label>
-                <input type="tel" id="customer-phone" required placeholder="+91 98765 43210">
+                <input type="tel" id="customer-phone" required placeholder="Mobile Number">
               </div>
             </div>
             <div class="form-group">
               <label>Delivery Option</label>
-              <select class="custom-select w-full" id="delivery-method-select" style="width: 100%; padding: 0.75rem;">
+              <select class="custom-select w-full" id="delivery-method-select">
                 <option value="courier">Pan-India Express Delivery (2-4 Days)</option>
                 <option value="pickup">In-Store Pickup (Gokul Road Store, Hubli)</option>
               </select>
             </div>
             <div class="form-group">
               <label>Full Delivery Address (Street, Landmark, City, State, Pincode)</label>
-              <input type="text" id="customer-address" required
-                placeholder="Gokul Road, Opp. RNS Motors, Hubli, Karnataka 580030">
+              <textarea id="customer-address" required rows="3"
+                placeholder="Full Delivery Address"></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-block btn-glow">
               <span>CONTINUE TO PAYMENT</span>
@@ -884,20 +889,20 @@
             <div id="payment-fields-card" class="payment-subpanel hidden">
               <div class="form-group">
                 <label>Cardholder Name</label>
-                <input type="text" id="card-name-input" placeholder="Chandan K">
+                <input type="text" id="card-name-input" placeholder="Cardholder Name">
               </div>
               <div class="form-group">
                 <label>Card Number</label>
-                <input type="text" id="card-number-input" placeholder="4532 •••• •••• 8892" maxlength="19">
+                <input type="text" id="card-number-input" placeholder="Card Number" maxlength="19">
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label>Expiry (MM/YY)</label>
-                  <input type="text" id="card-expiry-input" placeholder="12/28" maxlength="5">
+                  <input type="text" id="card-expiry-input" placeholder="MM/YY" maxlength="5">
                 </div>
                 <div class="form-group">
                   <label>CVV</label>
-                  <input type="password" id="card-cvv-input" placeholder="•••" maxlength="4">
+                  <input type="password" id="card-cvv-input" placeholder="CVV" maxlength="4">
                 </div>
               </div>
             </div>

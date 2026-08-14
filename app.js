@@ -853,6 +853,30 @@ function setupEventListeners() {
   const adminModal = document.getElementById('admin-modal');
   if (closeAdmin && adminModal) closeAdmin.addEventListener('click', () => adminModal.classList.remove('active'));
 
+  // Gallery Image Upload Picker & Preview Handler
+  let selectedImageDataUrl = '';
+  const fileInput = document.getElementById('new-prod-file-input');
+  const previewImg = document.getElementById('new-prod-preview');
+  const previewPlaceholder = document.getElementById('preview-placeholder');
+
+  if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          selectedImageDataUrl = event.target.result;
+          if (previewImg) {
+            previewImg.src = selectedImageDataUrl;
+            previewImg.style.display = 'block';
+          }
+          if (previewPlaceholder) previewPlaceholder.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
   const newProductForm = document.getElementById('add-product-form');
   if (newProductForm) {
     newProductForm.addEventListener('submit', (e) => {
@@ -865,7 +889,7 @@ function setupEventListeners() {
       const brand = document.getElementById('new-prod-brand').value;
       const category = document.getElementById('new-prod-category').value;
       const price = parseFloat(document.getElementById('new-prod-price').value);
-      const image = document.getElementById('new-prod-image').value || 'travis_scott_mocha.png';
+      const image = selectedImageDataUrl || 'travis_scott_mocha.png';
 
       const newId = PRODUCTS.length > 0 ? Math.max(...PRODUCTS.map(p => p.id)) + 1 : 1;
       PRODUCTS.push({
@@ -890,22 +914,43 @@ function setupEventListeners() {
       renderProductGrid();
       renderAdminProductList();
       newProductForm.reset();
-      showToast(`Added ${name} to catalog!`);
+      selectedImageDataUrl = '';
+      if (previewImg) previewImg.style.display = 'none';
+      if (previewPlaceholder) previewPlaceholder.style.display = 'block';
+      showToast(`🎉 Added ${name} with photo to store catalog!`);
     });
   }
 
   // Promo
   const applyPromoBtn = document.getElementById('apply-promo-btn');
   const promoInput = document.getElementById('promo-input');
+  const promoErrorTag = document.getElementById('promo-error-tag');
+  const promoErrorText = document.getElementById('promo-error-text');
+
   if (applyPromoBtn && promoInput) {
     applyPromoBtn.addEventListener('click', () => {
       const code = promoInput.value.trim().toUpperCase();
-      if (code === 'LACES20') {
-        state.appliedPromo = { code: 'LACES20', discountPercent: 20 };
-        showToast("🎉 Promo Code LACES20 Applied! (20% OFF)");
+      if (!code) {
+        if (promoErrorTag && promoErrorText) {
+          promoErrorText.textContent = "Please enter a promo code first.";
+          promoErrorTag.classList.remove('hidden');
+        }
+        showToast("Please enter a promo code", "error");
+        return;
+      }
+
+      if (code === 'LACES10') {
+        state.appliedPromo = { code: 'LACES10', discountPercent: 10 };
+        showToast("🎉 Promo Code LACES10 Applied! (10% OFF)");
+        promoInput.value = '';
+        if (promoErrorTag) promoErrorTag.classList.add('hidden');
         updateCartUI();
       } else {
-        showToast("Invalid Promo Code", "error");
+        if (promoErrorTag && promoErrorText) {
+          promoErrorText.textContent = `❌ "${code}" is invalid or expired!`;
+          promoErrorTag.classList.remove('hidden');
+        }
+        showToast(`❌ "${code}" is an invalid or expired promo code!`, "error");
       }
     });
   }
@@ -914,6 +959,7 @@ function setupEventListeners() {
   if (removePromoBtn) {
     removePromoBtn.addEventListener('click', () => {
       state.appliedPromo = null;
+      if (promoErrorTag) promoErrorTag.classList.add('hidden');
       showToast("Promo Code removed");
       updateCartUI();
     });
@@ -1250,7 +1296,7 @@ function orderCartViaWhatsApp() {
   if (state.cart.length === 0) return;
   const itemsStr = state.cart.map(i => `${i.name} (Size ${i.size}, Qty: ${i.qty})`).join('\n- ');
   const totals = calculateCartTotals();
-  const text = encodeURIComponent(`Hi Laces & Soles Hubli! I would like to order the following footwear from your website:\n\n- ${itemsStr}\n\nTotal Payable: ₹${totals.grandTotal.toLocaleString('en-IN')}`);
+  const text = encodeURIComponent(`Hi Laces & Soles Hubli! I would like to order the following footwear from your store:\n\n- ${itemsStr}\n\nTotal Payable: ₹${totals.grandTotal.toLocaleString('en-IN')}`);
   window.open(`https://wa.me/919876543210?text=${text}`, '_blank');
 }
 
@@ -1389,12 +1435,21 @@ function updateCartUI() {
   document.getElementById('cart-shipping').textContent = totals.shippingCost === 0 ? 'FREE' : `₹${totals.shippingCost}`;
   document.getElementById('cart-grand-total').textContent = `₹${totals.grandTotal.toLocaleString('en-IN')}`;
 
-  document.getElementById('co-subtotal').textContent = `₹${totals.subtotal.toLocaleString('en-IN')}`;
-  document.getElementById('co-shipping').textContent = totals.shippingCost === 0 ? 'FREE' : `₹${totals.shippingCost}`;
-  document.getElementById('co-total').textContent = `₹${totals.grandTotal.toLocaleString('en-IN')}`;
+  const coSub = document.getElementById('co-subtotal');
+  if (coSub) coSub.textContent = `₹${totals.subtotal.toLocaleString('en-IN')}`;
+  const coShip = document.getElementById('co-shipping');
+  if (coShip) coShip.textContent = totals.shippingCost === 0 ? 'FREE' : `₹${totals.shippingCost}`;
+  const coTot = document.getElementById('co-total');
+  if (coTot) coTot.textContent = `₹${totals.grandTotal.toLocaleString('en-IN')}`;
 
   const promoTag = document.getElementById('promo-applied-tag');
-  if (promoTag) promoTag.classList.toggle('hidden', !state.appliedPromo);
+  if (promoTag) {
+    promoTag.classList.toggle('hidden', !state.appliedPromo);
+    if (state.appliedPromo) {
+      const span = promoTag.querySelector('span');
+      if (span) span.textContent = `🎉 ${state.appliedPromo.code} Applied (${state.appliedPromo.discountPercent}% OFF)`;
+    }
+  }
 }
 
 function toggleWishlist(productId) {
@@ -1484,7 +1539,7 @@ function showToast(message, type = 'success') {
   if (!container) return;
 
   const toast = document.createElement('div');
-  toast.className = 'toast';
+  toast.className = `toast ${type === 'error' ? 'toast-error' : ''}`;
   toast.innerHTML = `
     <i data-lucide="${type === 'success' ? 'check-circle-2' : 'alert-circle'}" style="color: ${type === 'success' ? 'var(--accent-gold)' : 'var(--accent-red)'}"></i>
     <span>${message}</span>
