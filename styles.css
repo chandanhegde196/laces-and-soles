@@ -296,7 +296,7 @@ input, select { font-family: inherit; color: inherit; }
 /* ==========================================================================
    COMPACT & SLEEK INTRO SPLASH SCREEN WITH COMPACT SMALL TYPOGRAPHY
    ========================================================================== */
-.adidas-intro-splash {
+.adidas-intro-splash, .intro-splash {
   position: fixed;
   inset: 0;
   z-index: 99999;
@@ -310,7 +310,7 @@ input, select { font-family: inherit; color: inherit; }
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
 }
 
-.adidas-intro-splash.splash-hidden {
+.adidas-intro-splash.splash-hidden, .intro-splash.splash-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -770,6 +770,12 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
 .price-box { display: flex; align-items: baseline; gap: 0.5rem; }
 .current-price { font-family: var(--font-bebas); font-size: 1.5rem; color: var(--text-main); letter-spacing: 0.04em; }
 .old-price { font-size: 0.85rem; color: var(--text-dim); text-decoration: line-through; }
+
+/* Store Connection Badges */
+.store-availability-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0 0.8rem; }
+.avail-tag { font-size: 0.74rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 4px; }
+.avail-tag.in-store { color: #10b981; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); }
+.avail-tag.pickup { color: var(--accent-gold); background: rgba(255, 85, 0, 0.1); border: 1px solid rgba(255, 85, 0, 0.25); }
 .card-actions { display: flex; gap: 0.5rem; }
 
 .btn-icon { width: 40px; height: 40px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); }

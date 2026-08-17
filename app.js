@@ -16,7 +16,7 @@ let PRODUCTS = [
     rating: 4.8,
     reviewsCount: 246,
     badge: "limited",
-    badgeText: "🔥 Top Hype Drop",
+    badgeText: "In Store",
     image: "travis_scott_mocha.png",
     inStock: true,
     stockCount: 4,
@@ -33,7 +33,7 @@ let PRODUCTS = [
     rating: 4.7,
     reviewsCount: 189,
     badge: "limited",
-    badgeText: "Hype Drop",
+    badgeText: "In Store",
     image: "jordan_chicago_real.jpg",
     inStock: true,
     stockCount: 5,
@@ -49,7 +49,7 @@ let PRODUCTS = [
     oldPrice: 3799,
     rating: 4.7,
     reviewsCount: 142,
-    badge: "sale",
+    badge: "new",
     badgeText: "Gym & Run",
     image: "adidas_ultraboost_light.jpg",
     inStock: true,
@@ -605,15 +605,14 @@ function renderProductGrid() {
         <div class="product-card-body">
           <span class="product-category">${product.brand}</span>
           <h3 class="product-name" onclick="openQuickView(${product.id})">${product.name}</h3>
-          
-          <div class="product-rating">
-            <span>★ ${product.rating.toFixed(1)}</span>
-            <span class="review-count">(${product.reviewsCount} reviews)</span>
-          </div>
 
           <div class="price-box">
             <span class="current-price">₹${product.price.toLocaleString('en-IN')}</span>
-            ${product.oldPrice ? `<span class="old-price">₹${product.oldPrice.toLocaleString('en-IN')}</span>` : ''}
+          </div>
+
+          <div class="store-availability-tags">
+            <span class="avail-tag in-store"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Available in Store</span>
+            <span class="avail-tag pickup"><i data-lucide="map-pin" style="width: 12px; height: 12px;"></i> Store Pickup Available</span>
           </div>
 
           <!-- Dedicated Size Selection Buttons Section -->
@@ -1103,7 +1102,7 @@ function setupEventListeners() {
 
         const whatsappBtn = document.getElementById('whatsapp-order-btn');
         if (whatsappBtn) {
-          whatsappBtn.href = `https://wa.me/919876543210?text=${encodeURIComponent(waMessageText)}`;
+          whatsappBtn.href = `https://wa.me/918147387437?text=${encodeURIComponent(waMessageText)}`;
         }
 
         // Copy Order Text logic
@@ -1210,13 +1209,13 @@ function openQuickView(productId) {
       <div class="quickview-details">
         <span class="product-category">${product.brand}</span>
         <h2 style="font-family: var(--font-display); font-size: 1.8rem;">${product.name}</h2>
-        
-        <div class="product-rating" style="margin-bottom: 1rem;">
-          <span>★ ${product.rating.toFixed(1)}</span>
-          <span class="review-count">(${product.reviewsCount} verified reviews)</span>
-        </div>
 
         <div class="quickview-price">₹${product.price.toLocaleString('en-IN')}</div>
+
+        <div class="store-availability-tags" style="margin-bottom: 1.2rem;">
+          <span class="avail-tag in-store"><i data-lucide="check" style="width: 13px; height: 13px;"></i> Available in Store</span>
+          <span class="avail-tag pickup"><i data-lucide="map-pin" style="width: 13px; height: 13px;"></i> Store Pickup Available</span>
+        </div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">
           ${product.description}
         </p>
@@ -1289,7 +1288,7 @@ function orderViaInstagram(productName) {
 
 function openWhatsAppOrder(contextMsg = 'General Inquiries') {
   const text = encodeURIComponent(`Hi Laces & Soles Hubli! I have an inquiry regarding: ${contextMsg}.`);
-  window.open(`https://wa.me/919876543210?text=${text}`, '_blank');
+  window.open(`https://wa.me/918147387437?text=${text}`, '_blank');
 }
 
 function orderCartViaWhatsApp() {
@@ -1297,7 +1296,7 @@ function orderCartViaWhatsApp() {
   const itemsStr = state.cart.map(i => `${i.name} (Size ${i.size}, Qty: ${i.qty})`).join('\n- ');
   const totals = calculateCartTotals();
   const text = encodeURIComponent(`Hi Laces & Soles Hubli! I would like to order the following footwear from your store:\n\n- ${itemsStr}\n\nTotal Payable: ₹${totals.grandTotal.toLocaleString('en-IN')}`);
-  window.open(`https://wa.me/919876543210?text=${text}`, '_blank');
+  window.open(`https://wa.me/918147387437?text=${text}`, '_blank');
 }
 
 function addToCart(productId, size = 41, qty = 1) {
@@ -1376,19 +1375,7 @@ function updateCartUI() {
   if (cartItemCount) cartItemCount.textContent = totalItems;
   if (cartTotalPreview) cartTotalPreview.textContent = `₹${totals.grandTotal.toLocaleString('en-IN')}`;
 
-  const freeShipText = document.getElementById('free-shipping-text');
-  const freeShipFill = document.getElementById('shipping-progress-fill');
-  if (freeShipText && freeShipFill) {
-    if (totals.subtotal >= 1500) {
-      freeShipText.innerHTML = `🎉 You've unlocked <strong>FREE Express Shipping across India!</strong>`;
-      freeShipFill.style.width = '100%';
-    } else {
-      const remaining = 1500 - totals.subtotal;
-      freeShipText.innerHTML = `Add <strong>₹${remaining.toLocaleString('en-IN')}</strong> more for <strong>FREE Shipping</strong>`;
-      const pct = Math.min(100, (totals.subtotal / 1500) * 100);
-      freeShipFill.style.width = `${pct}%`;
-    }
-  }
+
 
   if (container) {
     if (state.cart.length === 0) {
@@ -1396,7 +1383,7 @@ function updateCartUI() {
         <div style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
           <i data-lucide="shopping-bag" style="width: 48px; height: 48px; opacity: 0.3; margin-bottom: 1rem;"></i>
           <p style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);">Your bag is empty</p>
-          <p style="font-size: 0.88rem;">Find your authentic Air Jordan Chicago, Ultraboost, or Yeezy sneakers.</p>
+          <p style="font-size: 0.88rem;">Find your favorite Air Jordan Chicago, Ultraboost, or Yeezy sneakers at honest prices.</p>
         </div>
       `;
     } else {
